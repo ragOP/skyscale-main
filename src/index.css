@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/* Animated gradient background */
+@keyframes gradient-x {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-x {
+  animation: gradient-x 3s ease infinite;
+}
+  
+  /* Simple, clean styles */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+/* Focus styles */
+.focus-ring:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: rgba(59, 130, 246, 0.5);
+}
+
+/* Smooth transitions */
+* {
+  transition: all 0.2s ease;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes border-spin {
+  0% { border-color: #ff7f50; }
+  25% { border-color: #ff6347; }
+  50% { border-color: #ff4500; }
+ 75% { border-color: #ff6347; }
+  100% { border-color: #ff7f50; }
+}
+
+.animate-border-spin {
+  animation: border-spin 4s linear infinite;
+}
+
+.animate-border-spin:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+}
+
+.clickable-card::after {
+  content: '→';
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.clickable-card:hover::after {
+  opacity: 1;
+}
