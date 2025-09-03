@@ -7,7 +7,7 @@ const CTAButton = ({
   variant = "primary",
   size = "lg" 
 }) => {
-  const baseClasses = "relative overflow-hidden font-bolder transition-all duration-400 transform active:scale-95 group";
+  const baseClasses = "relative overflow-hidden font-bolder transition-all duration-400 transform active:scale-95 group font-serif";
   
   const variants = {
     primary: "bg-black text-white border-4 border-orange-400 hover:translate-x-1 hover:-translate-y-1 hover:border-orange-500",

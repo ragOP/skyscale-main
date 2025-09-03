@@ -3,19 +3,17 @@ import CTAButton from "../common/CTAButton";
 const Hero = () => {
     return (
         <div className="pt-24 relative bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/astro-bg.webp)' }}>
-            {/* Overlay for better text readability */}
-            <div className="absolute inset-0 bg-black/40"></div>
 
             {/* Content */}
             <div className="relative z-10 flex flex-col items-center justify-center">
                 <div className="text-center text-white px-6">
-                    <h1 className="text-2xl md:text-7xl font-bold mb-6">
+                    <h1 className="text-2xl md:text-7xl font-bold font-serif mb-6">
                         Personalised Astrology Solutions
                     </h1>
-                    <p className="text-3xl font-bold md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto">
+                    <p className="text-3xl font-bold md:text-2xl text-gray-200 mb-8 max-w-3xl font-serif mx-auto">
                         Get 5 minutes free on your first consultation
                     </p>
-                    <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto">
+                    <p className="text-xl md:text-2xl text-gray-200 mb-8 font-serif max-w-3xl mx-auto">
                         Most accurate predictions along with remedial consultation from the most trusted Astrologers in India
                     </p>
                     <CTAButton>
@@ -42,7 +40,7 @@ const Hero = () => {
 
                 </div>
 
-                <img src="hero-bg-bottom.png" alt="Hero Background Bottom"  />
+                <img src="hero-bg-bottom.png" alt="Hero Background Bottom" className="w-full"  />
 
             </div>
         </div>

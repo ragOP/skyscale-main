@@ -45,46 +45,46 @@ const testimonials = [
     name: "Rohan D.",
     quote: "This was a fun and surprisingly moving experience. The description of my soulmate's character felt very real and familiar.",
   },
-//   {
-//     name: "Meera J.",
-//     quote: "Absolutely stunning artwork. The psychic reading provided clarity that I didn't even know I was looking for. Highly recommend!",
-//   },
-//   {
-//     name: "Arjun P.",
-//     quote: "The customer service was excellent and the delivery was fast. The sketch itself is a work of art that I will cherish.",
-//   },
-//   {
-//     name: "Isha V.",
-//     quote: "This is more than a sketch; it's a piece of hope. The reading was so positive and aligned with my own feelings. Thank you!",
-//   },
-//   {
-//     name: "Amit K.",
-//     quote: "The quality of the artwork is phenomenal. It's a very professional service and the reading was surprisingly detailed and uplifting.",
-//   },
-//   {
-//     name: "Deepika R.",
-//     quote: "I showed the sketch to my mom and she got emotional. She said it looked like the person she always imagined for me. So beautiful.",
-//   },
-//   {
-//     name: "Rajesh S.",
-//     quote: "Got this for my sister as a gift and she absolutely loved it. The look on her face when she saw the sketch was priceless. 10/10 recommend.",
-//   },
-//   {
-//     name: "Kavita C.",
-//     quote: "The details in the sketch are insane! It's like the artist peered into my soul. I'm so excited for my future.",
-//   },
-//   {
-//     name: "Manish T.",
-//     quote: "This was a gift for my anniversary, and my wife and I were both amazed. The reading was so insightful and positive.",
-//   },
-//   {
-//     name: "Pooja G.",
-//     quote: "I can't stop looking at my sketch. It feels so real and has given me so much hope. Thank you for this beautiful gift!",
-//   },
-//   {
-//     name: "Alok N.",
-//     quote: "The turnaround was so fast, and the quality is top-notch. I highly recommend this to anyone curious about their soulmate.",
-//   }
+  //   {
+  //     name: "Meera J.",
+  //     quote: "Absolutely stunning artwork. The psychic reading provided clarity that I didn't even know I was looking for. Highly recommend!",
+  //   },
+  //   {
+  //     name: "Arjun P.",
+  //     quote: "The customer service was excellent and the delivery was fast. The sketch itself is a work of art that I will cherish.",
+  //   },
+  //   {
+  //     name: "Isha V.",
+  //     quote: "This is more than a sketch; it's a piece of hope. The reading was so positive and aligned with my own feelings. Thank you!",
+  //   },
+  //   {
+  //     name: "Amit K.",
+  //     quote: "The quality of the artwork is phenomenal. It's a very professional service and the reading was surprisingly detailed and uplifting.",
+  //   },
+  //   {
+  //     name: "Deepika R.",
+  //     quote: "I showed the sketch to my mom and she got emotional. She said it looked like the person she always imagined for me. So beautiful.",
+  //   },
+  //   {
+  //     name: "Rajesh S.",
+  //     quote: "Got this for my sister as a gift and she absolutely loved it. The look on her face when she saw the sketch was priceless. 10/10 recommend.",
+  //   },
+  //   {
+  //     name: "Kavita C.",
+  //     quote: "The details in the sketch are insane! It's like the artist peered into my soul. I'm so excited for my future.",
+  //   },
+  //   {
+  //     name: "Manish T.",
+  //     quote: "This was a gift for my anniversary, and my wife and I were both amazed. The reading was so insightful and positive.",
+  //   },
+  //   {
+  //     name: "Pooja G.",
+  //     quote: "I can't stop looking at my sketch. It feels so real and has given me so much hope. Thank you for this beautiful gift!",
+  //   },
+  //   {
+  //     name: "Alok N.",
+  //     quote: "The turnaround was so fast, and the quality is top-notch. I highly recommend this to anyone curious about their soulmate.",
+  //   }
 ];
 
 function TestimonialCard({ name, quote }) {
@@ -104,10 +104,9 @@ function TestimonialCard({ name, quote }) {
     </div>
   );
 }
-
-export default function TestimonialsSection({ isCartPage = false }) {
+const TestimonialsSection = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel(
-    { 
+    {
       loop: true,
       align: "start",
       slidesToScroll: 1,
@@ -140,12 +139,14 @@ export default function TestimonialsSection({ isCartPage = false }) {
   }, [emblaApi, onInit, onSelect]);
 
   return (
-    <section className="py-7 sm:py-16 bg-gradient-to-br from-gray-50 to-orange-50">
+    <section className="py-12 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-7 sm:mb-16 font-clash">
           What Our Clients Say
         </h2>
-        
+
+        <div className="border-b-4 border-orange-500 mx-[30%] mb-12" />
+
         {/* Carousel Container */}
         <div className="relative">
           <div className="overflow-hidden" ref={emblaRef}>
@@ -159,25 +160,26 @@ export default function TestimonialsSection({ isCartPage = false }) {
               ))}
             </div>
           </div>
-          
+
           {/* Dots Navigation */}
           <div className="flex justify-center mt-8 space-x-2">
             {scrollSnaps.map((_, index) => (
               <button
                 key={index}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === selectedIndex
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${index === selectedIndex
                     ? 'bg-orange-500 scale-125'
                     : 'bg-gray-300 hover:bg-gray-400'
-                }`}
+                  }`}
                 onClick={() => scrollTo(index)}
               />
             ))}
           </div>
         </div>
-        
-     
+
+
       </div>
     </section>
   );
 } 
+
+export default TestimonialsSection;

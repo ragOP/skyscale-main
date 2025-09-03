@@ -4,6 +4,7 @@ import Cart from '../pages/Cart';
 import Layout from '../components/common/Layout';
 import Products from '../pages/Products';
 import Home2 from '../pages/Home2';
+import LoveReport from '../pages/LoveReport';
 
 export const router = createBrowserRouter([
   {
@@ -23,9 +24,9 @@ export const router = createBrowserRouter([
         element: <Products />
       },
       {
-        path: 'home-2',
-        element: <Home2 />
-      }
+        path: 'love-report',
+        element: <LoveReport />
+      },
     ]
   }
 ]);

@@ -1,27 +1,23 @@
-import HeroWithNavbar from '../components/home/HeroWithNavbar';
-import ExperienceSection from '../components/home/ExperienceSection';
-import VideoSection from '../components/home/VideoSection';
-import FeaturesSection from '../components/home/FeaturesSection';
-import BenefitsSection from '../components/home/BenefitsSection';
-import NewsletterSection from '../components/home/NewsletterSection';
-import OurServices from '../components/home/OurServices';
-import TestimonialsSection from '../components/home/TestimonialsSection';
-import FAQSection from '../components/home/FAQSection';
+import Hero from "../components/home/Hero";
+import Navbar from "../components/home/Navbar";
+import OurServices from "../components/home/OurProducts";
+import WhyChooseUs from "../components/home/WhyChooseUs";
+import FAQSection from "../components/home/FAQSection";
+import AboutUs from "../components/home/AboutUs";
+import Footer from "../components/common/Footer";
 
 const Home = () => {
-  return (
-    <>
-      <HeroWithNavbar />
-      <VideoSection />
-      <OurServices />
-      {/* <ExperienceSection /> */}
-      <TestimonialsSection />
-      <FeaturesSection />
-      <FAQSection />
-      {/* <BenefitsSection /> */}
-      {/* <NewsletterSection /> */}
-    </>
-  );
-};
+    return (
+        <div className="flex flex-col">
+            <Navbar />
+            <Hero />
+            <OurServices/>
+            <WhyChooseUs />
+            <FAQSection />
+            <AboutUs />
+            <Footer />
+        </div>
+    );
+}
 
 export default Home;

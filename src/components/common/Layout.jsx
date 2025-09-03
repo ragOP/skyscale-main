@@ -3,11 +3,11 @@ import Footer from './Footer';
 
 const Layout = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-white">
       <main>
         <Outlet />
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

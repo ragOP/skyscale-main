@@ -1,49 +1,35 @@
 import { useState } from 'react';
-import { Plus, Minus, HelpCircle } from 'lucide-react';
+import { Plus, Minus } from 'lucide-react';
+import CTAButton from '../common/CTAButton';
 
 const FAQSection = () => {
-  const [openFAQ, setOpenFAQ] = useState(null);
+  const [openFAQ, setOpenFAQ] = useState(1); // First FAQ is open by default
 
   const faqs = [
     {
       id: 1,
-      question: "What is Vedic Astrology and how is it different from Western Astrology?",
-      answer: "Vedic Astrology, also known as Jyotish, is an ancient Indian system of astrology that's over 5000 years old. Unlike Western astrology which uses the tropical zodiac, Vedic astrology uses the sidereal zodiac based on the actual positions of stars. It provides more detailed predictions and focuses on karma, dharma, and spiritual growth."
+      question: "What is Astrology?",
+      answer: "Astrology is the study of the movements and relative positions of celestial bodies interpreted as having an influence on human affairs and the natural world. It's an ancient practice that helps us understand our personality, relationships, and life events through the positions of planets and stars at the time of our birth."
     },
     {
       id: 2,
-      question: "How accurate are your astrology predictions?",
-      answer: "Our predictions are based on authentic Vedic astrology principles with over 99% accuracy rate. We use your exact birth time, date, and location to create precise birth charts. However, astrology provides guidance and probabilities - your free will and actions ultimately shape your destiny."
+      question: "How Can Astrology Help Me?",
+      answer: "Astrology can help you understand your personality traits, strengths, and weaknesses. It provides insights into your relationships, career path, health, and life timing. By understanding your astrological profile, you can make better decisions and navigate life's challenges with greater awareness."
     },
     {
       id: 3,
-      question: "What information do I need to provide for a reading?",
-      answer: "For an accurate reading, we need your exact birth date, birth time (preferably to the minute), and birth location (city/town). If you don't know your exact birth time, we can work with approximate times, but the reading may be less precise."
+      question: "Are Astrology Predictions True?",
+      answer: "Astrology provides guidance and probabilities based on celestial patterns. While it can offer valuable insights and timing for events, it's important to remember that you have free will. Astrology is a tool for self-awareness and guidance, not absolute fate."
     },
     {
       id: 4,
-      question: "How long does it take to receive my astrology report?",
-      answer: "Digital reports are typically delivered within 24-48 hours after payment confirmation. Premium consultations are scheduled within 2-3 business days. Love reports and compatibility analyses are usually ready within 24 hours."
+      question: "Why Should I Choose EasyAstro For Astrology Consultation Over Other Platforms?",
+      answer: "EasyAstro offers authentic Vedic astrology consultations with experienced astrologers. We provide personalized readings, accurate predictions, and comprehensive reports. Our platform is trusted by millions of users and offers 24/7 support with a money-back guarantee."
     },
     {
       id: 5,
-      question: "Can astrology really predict my future love life?",
-      answer: "Vedic astrology can reveal your romantic tendencies, compatibility patterns, and favorable periods for relationships. Our love reports analyze your 7th house (marriage), Venus placement, and other relationship indicators to provide insights about your love life and potential partner characteristics."
-    },
-    {
-      id: 6,
-      question: "What makes your astrology services authentic?",
-      answer: "Our astrologers are trained in traditional Vedic astrology with years of experience. We use authentic Sanskrit texts, precise mathematical calculations, and time-tested techniques. All our predictions are based on classical astrology principles, not modern interpretations."
-    },
-    {
-      id: 7,
-      question: "Do you offer refunds if I'm not satisfied?",
-      answer: "Yes, we offer a 7-day money-back guarantee if you're not completely satisfied with your reading. We're confident in our accuracy and want you to be happy with your astrology experience."
-    },
-    {
-      id: 8,
-      question: "Can I ask follow-up questions after receiving my report?",
-      answer: "Absolutely! Premium consultation packages include follow-up support. For standard reports, you can purchase additional consultation time to discuss your reading in detail with our expert astrologers."
+      question: "Which Is The Most Trusted Astrology App and Website In India?",
+      answer: "EasyAstro is recognized as one of the most trusted astrology platforms in India. With over 38.4 million satisfied customers and 10,739+ verified astrologers, we have built a reputation for accuracy, authenticity, and excellent customer service."
     }
   ];
 
@@ -52,74 +38,82 @@ const FAQSection = () => {
   };
 
   return (
-    <section className="py-10 bg-gradient-to-br from-orange-50/50 to-red-50/30">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center mb-4">
-            <h2 className="text-4xl font-bold text-gray-900 font-playfair">
-              Frequently Asked Questions
-            </h2>
-          </div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Get answers to common questions about Vedic astrology and our services
-          </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-orange-400 to-red-500 rounded-full mx-auto mt-6"></div>
+    <section className="py-16 px-4 bg-white">
+      <div className="max-w-4xl mx-auto">
+        {/* Section Title */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-black mb-8">
+            FAQs About EasyAstro
+          </h2>
+
+          <div className="border-b-4 border-orange-500 mx-[35%] mb-12" />
+
         </div>
 
         {/* FAQ Items */}
-        <div className="space-y-4">
-          {faqs.map((faq) => (
-            <div
-              key={faq.id}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-orange-100/50 overflow-hidden transition-all duration-300 hover:shadow-xl"
-            >
-              <button
+        <div className="space-y-0 px-4">
+          {faqs.map((faq, index) => (
+            <div key={faq.id}>
+              {/* FAQ Item */}
+              <div 
+                className={`py-6 px-0 flex items-center justify-between cursor-pointer transition-all duration-500 ease-in-out ${
+                  openFAQ === faq.id 
+                    ? 'bg-blue-50 border-2 border-blue-200 rounded-lg px-4' 
+                    : 'hover:bg-gray-50'
+                }`}
                 onClick={() => toggleFAQ(faq.id)}
-                className="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-orange-50/50 transition-colors duration-300 focus:outline-none"
               >
-                <h3 className="text-lg font-semibold text-gray-900 pr-4 font-inter">
+                <h3 className="text-lg md:text-xl font-serif font-bold text-black flex-1 pr-4 transition-colors duration-300">
                   {faq.question}
                 </h3>
-                <div className="flex-shrink-0">
+                <div className="flex-shrink-0 transition-all duration-300 ease-in-out">
                   {openFAQ === faq.id ? (
-                    <Minus className="w-6 h-6 text-orange-600 transition-transform duration-300" />
+                    <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center transform rotate-180 transition-all duration-500 ease-in-out">
+                      <Minus className="w-4 h-4 text-gray-600 transition-all duration-300" />
+                    </div>
                   ) : (
-                    <Plus className="w-6 h-6 text-orange-600 transition-transform duration-300" />
+                    <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center transform rotate-0 transition-all duration-500 ease-in-out">
+                      <Plus className="w-4 h-4 text-gray-600 transition-all duration-300" />
+                    </div>
                   )}
                 </div>
-              </button>
-              
-              {openFAQ === faq.id && (
-                <div className="px-8 pb-6">
-                  <div className="border-t border-orange-100 pt-4 ">
-                    <p className="text-gray-600 leading-relaxed font-poppins mb-4">
-                      {faq.answer}
-                    </p>
-                  </div>
+              </div>
+
+              {/* Answer with smooth slide animation */}
+              <div 
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                  openFAQ === faq.id 
+                    ? 'max-h-96 opacity-100' 
+                    : 'max-h-0 opacity-0'
+                }`}
+              >
+                <div className="px-4 pb-6 bg-blue-50 border-2 border-blue-200 rounded-lg mx-0 -mt-2 transform transition-all duration-500 ease-in-out">
+                  <p className="text-gray-700 leading-relaxed pt-4 transform transition-all duration-500 ease-in-out">
+                    {faq.answer}
+                  </p>
                 </div>
+              </div>
+
+              {/* Separator Line */}
+              {index < faqs.length - 1 && (
+                <div className="border-b border-gray-200 transition-opacity duration-300"></div>
               )}
             </div>
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="text-center mt-16">
-          <p className="text-lg text-gray-600 mb-6">
-            Still have questions? We're here to help!
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-3 bg-gradient-to-r from-orange-600 to-red-600 text-white font-semibold rounded-full hover:from-orange-700 hover:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-              Contact Support
-            </button>
-            <button className="px-8 py-3 border-2 border-orange-600 text-orange-600 font-semibold rounded-full hover:bg-orange-600 hover:text-white transition-all duration-300">
-              Live Chat
-            </button>
-          </div>
+        {/* View All FAQs Button */}
+        <div className="text-center mt-12">
+          <CTAButton 
+            className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 ease-in-out transform hover:scale-105"
+            onClick={() => console.log('View all FAQs clicked')}
+          >
+            View all FAQs
+          </CTAButton>
         </div>
       </div>
     </section>
   );
 };
 
-export default FAQSection;
+export default FAQSection; 

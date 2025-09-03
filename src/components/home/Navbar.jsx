@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronRight, Home, Menu, X, ShoppingCart, User, Heart, Star } from 'lucide-react';
+import { ChevronRight, Home, Menu, X, ShoppingCart, User, Heart, Star, Palette, DollarSign } from 'lucide-react';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,7 +15,7 @@ const Navbar = () => {
 
         pathSegments.forEach((segment, index) => {
             const path = '/' + pathSegments.slice(0, index + 1).join('/');
-            const name = segment.charAt(0).toUpperCase() + segment.slice(1);
+            const name = segment.charAt(0).toUpperCase() + segment.slice(1).replace('-', ' ');
             breadcrumbs.push({ name, path });
         });
 
@@ -26,9 +26,10 @@ const Navbar = () => {
 
     const navigationItems = [
         { name: 'Home', path: '/', icon: Home },
-        { name: 'Products', path: '/products', icon: Star },
         { name: 'Love Report', path: '/love-report', icon: Heart },
-        { name: 'Consultation', path: '/premium-astro-consultation', icon: User }
+        { name: 'Consultation', path: '/premium-astro-consultation', icon: User },
+        { name: 'Soulmate Sketch', path: '/soulmate-sketch', icon: Palette },
+        { name: 'Wealth Report', path: '/wealth-report', icon: DollarSign }
     ];
 
     return (
@@ -53,7 +54,7 @@ const Navbar = () => {
                                 <Link
                                     key={item.name}
                                     to={item.path}
-                                    className="flex items-center space-x-2 text-gray-300 hover:text-orange-400 transition-colors duration-300 font-medium group"
+                                    className="flex items-center space-x-2 text-gray-300 hover:text-orange-400 transition-colors duration-300 font-serif font-medium group"
                                 >
                                     <Icon className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
                                     <span>{item.name}</span>
@@ -74,26 +75,35 @@ const Navbar = () => {
                     </div>
                 </div>
 
-
-
-                {/* Mobile Menu */}
+                {/* Mobile Menu - Increased Height */}
                 {isMenuOpen && (
-                    <div className="md:hidden py-4 border-t border-white/10">
-                        <div className="flex flex-col space-y-3">
+                    <div className="md:hidden py-4 border-t border-white/10 h-[70vh] overflow-y-auto">
+                        <div className="flex flex-col space-y-3 h-full">
                             {navigationItems.map((item) => {
                                 const Icon = item.icon;
                                 return (
                                     <Link
                                         key={item.name}
                                         to={item.path}
-                                        className="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-orange-400 hover:bg-white/5 transition-all duration-300 rounded-lg group"
+                                        className="flex items-center space-x-3 px-4 py-4 text-gray-300 hover:text-orange-400 hover:bg-white/5 transition-all duration-300 rounded-lg group"
                                         onClick={() => setIsMenuOpen(false)}
                                     >
-                                        <Icon className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-                                        <span className="font-medium">{item.name}</span>
+                                        <Icon className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+                                        <span className="font-serif font-medium text-lg">{item.name}</span>
                                     </Link>
                                 );
                             })}
+                            
+                            {/* Additional spacing to fill the height */}
+                            <div className="flex-1"></div>
+                            
+                            {/* Optional: Add some additional content or branding at the bottom */}
+                            <div className="px-4 py-6 border-t border-white/10">
+                                <div className="text-center">
+                                    <p className="text-gray-400 font-serif text-sm">EasyAstro</p>
+                                    <p className="text-gray-500 font-serif text-xs">DESTINY DECODED</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 )}
