@@ -6,7 +6,7 @@ const Hero = () => {
 
             {/* Content */}
             <div className="relative z-10 flex flex-col items-center justify-center">
-                <div className="text-center text-white px-6">
+                <div className="text-center text-white px-6 mb-4">
                     <h1 className="text-2xl md:text-7xl font-bold font-serif mb-6">
                         Personalised Astrology Solutions
                     </h1>
@@ -17,7 +17,7 @@ const Hero = () => {
                         Most accurate predictions along with remedial consultation from the most trusted Astrologers in India
                     </p>
                     <CTAButton>
-                        Chat with Astrologer
+                       Get Your Free Consultation
                     </CTAButton>
                 </div>
 

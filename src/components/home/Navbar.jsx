@@ -85,7 +85,7 @@ const Navbar = () => {
                                     <Link
                                         key={item.name}
                                         to={item.path}
-                                        className="flex items-center space-x-3 px-4 py-4 text-gray-300 hover:text-orange-400 hover:bg-white/5 transition-all duration-300 rounded-lg group"
+                                        className="flex border-b items-center space-x-3 px-4 py-4 text-gray-300 hover:text-orange-400 hover:bg-white/5 transition-all duration-300 rounded-lg group"
                                         onClick={() => setIsMenuOpen(false)}
                                     >
                                         <Icon className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />

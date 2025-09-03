@@ -2,6 +2,7 @@ import { Heart, Star, Check, Clock, Shield, Users, ChevronRight } from 'lucide-r
 import CTAButton from '../components/common/CTAButton';
 import Navbar from '../components/home/Navbar';
 import Footer from '../components/common/Footer';
+import AboutUs from '../components/home/AboutUs';
 
 const LoveReport = () => {
   const features = [
@@ -51,7 +52,7 @@ const LoveReport = () => {
                 </div>
               </div>
 
-              <p className="text-lg font-serif text-gray-700 mb-8 leading-relaxed">
+              <p className="text-lg font-serif text-gray-700 mb-8 leading-relaxed mt-8">
                 Personalized Love & Relationship Report based on Vedic astrology & numerology. Discover the secrets of your love life with our comprehensive analysis.
               </p>
 
@@ -114,7 +115,6 @@ const LoveReport = () => {
           </div>
         </div>
       </div>
-
       {/* Features Section */}
       <div className="py-12 bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -144,13 +144,18 @@ const LoveReport = () => {
         </div>
       </div>
 
+      <AboutUs className='py-2' />
+
+
       {/* Benefits Section */}
-      <div className="py-16 bg-gray-50">
+      <div className="py-8 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">
               Why Choose Our Love Report?
             </h2>
+
+            <div className='border-b-4 border-orange-500 w-1/2 mx-auto my-6'></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
