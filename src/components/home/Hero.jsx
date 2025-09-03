@@ -22,7 +22,7 @@ const Hero = () => {
                 </div>
 
                 {/* Rotating Images Container */}
-                <div className="relative w-80 h-80 md:w-96 md:h-96 mt-8">
+                <div className="relative w-80 h-80 md:w-96 md:h-96 mt-8 mb-8">
                     {/* bg-1 - Rotating background */}
                     <img
                         src="/bg-1.png"
