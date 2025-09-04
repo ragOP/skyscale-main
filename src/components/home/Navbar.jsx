@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronRight, Home, Menu, X, ShoppingCart, User, Heart, Star, Palette, DollarSign } from 'lucide-react';
+import { useCart } from '../../contexts/CartContext';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
+    const { items, toggleCart } = useCart();
 
     // Generate breadcrumbs based on current path
     const generateBreadcrumbs = () => {
@@ -65,6 +67,19 @@ const Navbar = () => {
 
                     {/* Right Side Actions */}
                     <div className="flex items-center space-x-4">
+                        {/* Cart Button */}
+                        <button
+                            onClick={toggleCart}
+                            className="relative p-2 text-gray-300 hover:text-orange-400 transition-colors duration-300"
+                        >
+                            <ShoppingCart className="w-6 h-6" />
+                            {items.length > 0 && (
+                                <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                                    {items.length}
+                                </span>
+                            )}
+                        </button>
+
                         {/* Mobile Menu Button */}
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}

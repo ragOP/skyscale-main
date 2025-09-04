@@ -5,7 +5,7 @@ import FeaturesSection from '../components/home2/FeaturesSection';
 import BenefitsSection from '../components/home2/BenefitsSection';
 import NewsletterSection from '../components/home2/NewsletterSection';
 import OurServices from '../components/home2/OurServices';
-import TestimonialsSection from '../components/home2/TestimonialsSection';
+// import TestimonialsSection from '../components/home/TestimonialsSection';
 import FAQSection from '../components/home2/FAQSection';
 
 const Home2 = () => {
@@ -15,7 +15,7 @@ const Home2 = () => {
       <VideoSection />
       <OurServices />
       {/* <ExperienceSection /> */}
-      <TestimonialsSection />
+      {/* <TestimonialsSection /> */}
       <FeaturesSection />
       <FAQSection />
       {/* <BenefitsSection /> */}

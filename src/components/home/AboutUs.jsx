@@ -1,6 +1,6 @@
 const AboutUs = ({ className = '' }) => {
     return (
-        <section className={`py-16 px-4 bg-gray-100 ${className}`}>
+        <section className={`py-12 px-4 bg-gray-100 ${className}`}>
             <div className="max-w-4xl mx-auto">
                 {/* Main Title */}
                 <div className="text-center mb-12">

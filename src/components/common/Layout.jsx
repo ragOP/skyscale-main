@@ -1,13 +1,13 @@
 import { Outlet } from 'react-router-dom';
-import Footer from './Footer';
+import CartDrawer from './CartDrawer';
 
 const Layout = () => {
   return (
-    <div className="bg-white">
-      <main>
+    <div className="h-[100vh] w-[100vw] overflow-scroll">
+      <div>
         <Outlet />
-      </main>
-      {/* <Footer /> */}
+      </div>
+      <CartDrawer />
     </div>
   );
 };
