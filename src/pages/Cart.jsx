@@ -3,21 +3,13 @@ import { Link } from 'react-router-dom';
 import { ShoppingCart, X, Plus, Minus, ArrowLeft } from 'lucide-react';
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Celestron NexStar 8SE",
-      price: 1299,
-      quantity: 1,
-      image: null
-    }
-  ]);
+  const [cartItems, setCartItems] = useState([]);
 
   const updateQuantity = (id, newQuantity) => {
     if (newQuantity <= 0) {
       setCartItems(cartItems.filter(item => item.id !== id));
     } else {
-      setCartItems(cartItems.map(item => 
+      setCartItems(cartItems.map(item =>
         item.id === id ? { ...item, quantity: newQuantity } : item
       ));
     }
@@ -36,8 +28,8 @@ const Cart = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex items-center mb-8">
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="flex items-center text-gray-600 hover:text-blue-600 transition-colors mr-4"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
@@ -51,8 +43,8 @@ const Cart = () => {
             <ShoppingCart className="w-24 h-24 text-gray-300 mx-auto mb-6" />
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Your cart is empty</h2>
             <p className="text-gray-600 mb-8">Looks like you haven't added any items to your cart yet.</p>
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-flex items-center"
             >
               Start Shopping
@@ -116,7 +108,7 @@ const Cart = () => {
             <div className="lg:col-span-1">
               <div className="bg-white rounded-lg shadow-sm p-6 sticky top-24">
                 <h2 className="text-xl font-semibold text-gray-900 mb-6">Order Summary</h2>
-                
+
                 <div className="space-y-4 mb-6">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Subtotal</span>
@@ -139,7 +131,7 @@ const Cart = () => {
                 <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors mb-4">
                   Proceed to Checkout
                 </button>
-                
+
                 {subtotal < 99 && (
                   <p className="text-sm text-gray-600 text-center">
                     Add ${(99 - subtotal).toFixed(2)} more for free shipping

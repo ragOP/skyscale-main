@@ -8,6 +8,8 @@ import LoveReport from '../pages/LoveReport';
 import PremiumAstroConsultation from '../pages/PremiumAstroConsultation';
 import SoulmateSketch from '../pages/SoulmateSketch';
 import WealthReport from '../pages/WealthReport';
+import Records from '../pages/Records';
+import OrderConfirmation from '../pages/OrderConfirmation';
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +43,14 @@ export const router = createBrowserRouter([
       {
         path: 'wealth-report',
         element: <WealthReport />
+      },
+      {
+        path: 'record',
+        element: <Records />
+      },
+      {
+        path: 'order-confirmation',
+        element: <OrderConfirmation />
       },
     ]
   }

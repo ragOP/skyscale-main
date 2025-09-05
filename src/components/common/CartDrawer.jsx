@@ -2,12 +2,17 @@ import { X, Trash2, Heart, Star, Clock, Shield } from 'lucide-react';
 import { useCart } from '../../contexts/CartContext';
 import CTAButton from './CTAButton';
 import { useEffect, useState } from 'react';
+import { BACKEND_URL } from '../../utils/endpoint';
+import { useNavigate } from 'react-router';
 
 const CartDrawer = () => {
-    const { isOpen, items, closeCart, removeFromCart, addToCart, getTotalPrice, getTotalSavings } = useCart();
+    const navigate = useNavigate()
+    const { isOpen, items, closeCart, removeFromCart, addToCart, getTotalPrice, getTotalSavings, clearCart } = useCart();
 
     const [timeLeft, setTimeLeft] = useState(5 * 60); // 5 minutes in seconds
+    const [isCheckingOut, setIsCheckingOut] = useState(false);
 
+    // Backend URL - you'll need to set this in your environment
 
     const products = [
         {
@@ -60,7 +65,186 @@ const CartDrawer = () => {
 
     const suggestedProducts = products.filter(product =>
         !items.some(item => item.id === product.id)
-    ).slice(0, 3);
+    ).slice(0, items.length === 0 ? 4 : 3);
+
+    // Load Razorpay script
+    const loadScript = (src) => {
+        return new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = src;
+            script.onload = () => resolve(true);
+            script.onerror = () => resolve(false);
+            document.body.appendChild(script);
+        });
+    };
+
+    const handleCheckout = async () => {
+        if (items.length === 0) return;
+
+        try {
+
+            const abdOrderResponse = await fetch(
+                `${BACKEND_URL}/api/lander3/create-order-abd`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        amount: 2,
+                        items: items.map(item => ({
+                            id: item.id,
+                            title: item.name,
+                            price: item.price
+                        })),
+                    }),
+                }
+            );
+
+            const abdOrderResult = await abdOrderResponse.json();
+            const abdOrderId = abdOrderResult.data._id;
+
+            if (!abdOrderResult.success) {
+                throw new Error("Failed to create payment order");
+            } else {
+                console.log("Abandoned Order Created with Id", abdOrderId);
+            }
+
+            setIsCheckingOut(true);
+
+            // Create Razorpay order
+            const response = await fetch(`${BACKEND_URL}/api/payment/razorpay`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    // amount: getTotalPrice(),
+                    amount: 2,
+                }),
+            });
+
+            const result = await response.json();
+
+            if (!result.success) {
+                throw new Error("Failed to create payment order");
+            }
+
+            const data = result.data;
+
+            const options = {
+                key: import.meta.env.VITE_RAZORPAY_KEY,
+                // amount: getTotalPrice(),
+                amount: 2,
+                currency: "INR",
+                name: "EasyAstro",
+                description: "Astrology Services Order Payment",
+                order_id: data.orderId,
+                handler: async function (response) {
+                    console.log(">>>", response)
+                    try {
+                        // Create order in database
+                        const orderResponse = await fetch(
+                            `${BACKEND_URL}/api/lander6/create-order`,
+                            {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                    // amount: getTotalPrice(),
+                                    amount: 2,
+                                    razorpayOrderId: response.razorpay_order_id,
+                                    razorpayPaymentId: response.razorpay_payment_id,
+                                    razorpaySignature: response.razorpay_signature,
+                                    
+                                    orderId: data.orderId,
+                                    items: items.map(item => ({
+                                        id: item.id,
+                                        title: item.name,
+                                        price: item.price
+                                    })),
+                                }),
+                            }
+                        );
+
+                        const orderResult = await orderResponse.json();
+
+                        if (orderResult.success) {
+                            // sessionStorage.setItem("orderId", data.orderId);
+                            // sessionStorage.setItem("orderAmount", getTotalPrice().toString());
+                            // sessionStorage.setItem("orderProducts", JSON.stringify(items));
+
+                            // Clear cart after successful payment
+                            clearCart();
+                            closeCart();
+
+                            console.log("CART >>>>>>>>>>", {
+                                orderId: data.orderId,
+                                orderAmount: getTotalPrice().toString(),
+                                orderProducts: items
+                            })
+
+                            // Show success message
+                            alert("Payment successful! Your order has been placed.");
+
+                            const deleteAbdOrder = await fetch(
+                                `${BACKEND_URL}/api/lander3/delete-order-abd`,
+                                {
+                                    method: "DELETE",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                    // body: JSON.stringify({ email: consultationFormData?.email }), // send the email here
+                                }
+                            );
+                            const deleteAbdOrderResult = await deleteAbdOrder.json();
+                            console.log("Abandoned Order Deleted", deleteAbdOrderResult);
+
+                            navigate('/order-confirmation', {
+                                state: {
+                                    orderId: data.orderId,
+                                    orderAmount: getTotalPrice().toString(),
+                                    orderProducts: items
+                                }
+                            })
+
+                        } else {
+                            alert(
+                                "Payment successful but order creation failed. Please contact support."
+                            );
+                        }
+                    } catch (error) {
+                        console.error("Error creating order:", error);
+                        alert(
+                            "Payment successful but order creation failed. Please contact support."
+                        );
+                    }
+                },
+                theme: {
+                    color: "#E052B1",
+                },
+            };
+
+            const rzp = new window.Razorpay(options);
+            rzp.open();
+        } catch (error) {
+            console.error("Checkout error:", error);
+            alert("Payment failed. Please try again.");
+        } finally {
+            setIsCheckingOut(false);
+        }
+    };
+
+    useEffect(() => {
+        loadScript("https://checkout.razorpay.com/v1/checkout.js").then(
+            (result) => {
+                if (result) {
+                    console.log("Razorpay script loaded successfully");
+                }
+            }
+        );
+    }, []);
 
     useEffect(() => {
         if (isOpen) {
@@ -91,8 +275,6 @@ const CartDrawer = () => {
 
         return () => clearInterval(timer);
     }, [isOpen]);
-
-
 
     if (!isOpen) return null;
 
@@ -197,7 +379,7 @@ const CartDrawer = () => {
                                         onClick={() => removeFromCart(item.id)}
                                         className="absolute top-2 right-2 p-1 hover:bg-gray-700 rounded transition-colors"
                                     >
-                                        <Trash2 className="w-4 h-4 text-gray-400" />
+                                        <Trash2 className="w-4 h-4 text-red-400 hover:text-red-500" />
                                     </button>
                                 </div>
                             ))}
@@ -264,8 +446,12 @@ const CartDrawer = () => {
                         </div>
 
                         {/* CTA Button */}
-                        <CTAButton className="w-full text-center py-4 text-lg font-serif">
-                            BUY NOW
+                        <CTAButton
+                            className="w-full text-center py-4 text-lg font-serif"
+                            onClick={handleCheckout}
+                            disabled={isCheckingOut}
+                        >
+                            {isCheckingOut ? 'PROCESSING...' : 'BUY NOW'}
                         </CTAButton>
 
                         <div className="text-center">
